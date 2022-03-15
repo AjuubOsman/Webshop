@@ -2,32 +2,33 @@
 include '../../private/connection.php';
 
 $email = $_POST['email'];
-$Wachtwoord = $_POST['wachtwoord'];
-$Voornaam = $_POST['voornaam'];
-$Tussenvoegsel = $_POST['tussenvoegsel'];
-$Achternaam = $_POST['achternaam'];
-$Woonplaats = $_POST['woonplaats'];
-$Straat = $_POST['straat'];
-$Huisnummer = $_POST['huisnummer'];
-$Postcode = $_POST['postcode'];
-$Geboortedatum = $_POST['geboortedatum'];
+$password = $_POST['password'];
+$firstname = $_POST['firstname'];
+$middlename = $_POST['middlename'];
+$lastname = $_POST['lastname'];
+$city = $_POST['city'];
+$street = $_POST['street'];
+$housenumber = $_POST['housenumber'];
+$zipcode = $_POST['zipcode'];
+$dob = $_POST['dob'];
+$role = "klant";
+
+$stmt = $conn->prepare("INSERT INTO users (email,password,firstname, middlename, lastname,city,street,housenumber,zipcode,dob, role)
+                                                   values(:email,:password,:firstname, :middlename, :lastname, :city,:street,:housenumber,:zipcode,:dob, :role)");
 
 
-$stmt = $conn->prepare("INSERT INTO gebruikers (email,wachtwoord,Voornaam, Tussenvoegsel, Achternaam,Woonplaats,straat,Huisnummer,Postcode,geboortedatum)
-                                                   values(:email,:wachtwoord,:voornaam, :tussenvoegsel, :achternaam, :woonplaats,:straat,:huisnummer,:postcode,:geboortedatum)");
 
-
-
-$stmt->bindParam(':voornaam' , $Voornaam);
-$stmt->bindParam(':tussenvoegsel' , $Tussenvoegsel);
-$stmt->bindParam(':achternaam' , $Achternaam);
-$stmt->bindParam(':woonplaats' , $Woonplaats);
-$stmt->bindParam(':straat' , $Straat);
-$stmt->bindParam(':huisnummer' , $Huisnummer);
-$stmt->bindParam(':postcode' , $Postcode);
-$stmt->bindParam(':wachtwoord' , $Wachtwoord);
-$stmt->bindParam(':geboortedatum' , $Geboortedatum);
+$stmt->bindParam(':firstname' , $firstname);
+$stmt->bindParam(':middlename' , $middlename);
+$stmt->bindParam(':lastname' , $lastname);
+$stmt->bindParam(':city' , $city);
+$stmt->bindParam(':street' , $street);
+$stmt->bindParam(':housenumber' , $housenumber);
+$stmt->bindParam(':zipcode' , $zipcode);
+$stmt->bindParam(':password' , $password);
+$stmt->bindParam(':dob' , $dob);
 $stmt->bindParam(':email' , $email);
+$stmt->bindParam(':role' , $role);
 
 
 

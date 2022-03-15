@@ -1,32 +1,23 @@
-
-    <head>
-        <link rel="stylesheet"  href="css/style.css">
-    </head>
-    <body>
-    <div class="sidenav">
-        <div class="login-main-text">
-            <h2>Welkom<br>V&D</h2>
-            <p>Login of registreer.</p>
-        </div>
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Welkom<br>V&D</h2>
+        <p>Login of registreer.</p>
     </div>
-    <div class="main">
-        <div class="col-md-6 col-sm-12">
-            <div class="login-form">
-                <form method="POST" action="php/Login.php">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="E-mail">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" name="wachtwoord" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-black">Login</button>
-                    <button type="submit" class="btn btn-secondary">Register</button>
-                </form>
+</div>
+<div class="main">
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post" action="php/login.php">
+            <div class="mb-3 mt-3">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
             </div>
-        </div>
-    </div>
+            <div class="mb-3">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+            </div>
 
-    </body>
-    </html>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

@@ -4,26 +4,26 @@ session_start();
 include '../../private/connection.php';
 
 $email = $_POST['email'];
-$wachtwoord = $_POST['wachtwoord'];
+$password = $_POST['password'];
 
-$sql = 'SELECT rol, gebruikersid FROM gebruikers WHERE email= :email AND wachtwoord = :wachtwoord';
+$sql = "SELECT role, user_ID FROM users WHERE email= :email AND password = :password";
 
 $query = $conn->prepare($sql);
 $query->bindParam(':email', $email);
-$query->bindParam(':wachtwoord', $wachtwoord);
+$query->bindParam(':password', $password);
 $query->execute();
 
 
 if ($query->rowCount() == 1 ) {
     $result = $query->fetch(PDO::FETCH_ASSOC);
-    if ($result['rol'] == "") {
-        $_SESSION['ingelogd'] = true;
+    if ($result['role'] == "klant") {
+        $_SESSION['role'] = "klant";
         $_SESSION['gebruikersid'] = $result['gebruikersid'];
         header('location: ../index.php?page=hoofdpagina');
-    } elseif ($result['rol'] == "admin") {
-        $_SESSION['ingelogd1'] = true;
+    } elseif ($result['role'] == "admin") {
+        $_SESSION['role'] = "admin";
         $_SESSION['gebruikersid'] = $result['gebruikersid'];
-        header('location: ../index.php?page=hoofdpagina');
+        header('location: ../index.php?page=categoriebeheer');
     }
 }else{
 
