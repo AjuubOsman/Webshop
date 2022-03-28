@@ -18,12 +18,12 @@ if ($query->rowCount() == 1 ) {
     $result = $query->fetch(PDO::FETCH_ASSOC);
     if ($result['role'] == "klant") {
         $_SESSION['role'] = "klant";
-        $_SESSION['gebruikersid'] = $result['gebruikersid'];
+        $_SESSION['gebruikersid'] = $result['user_ID'];
         header('location: ../index.php?page=hoofdpagina');
     } elseif ($result['role'] == "admin") {
         $_SESSION['role'] = "admin";
-        $_SESSION['gebruikersid'] = $result['gebruikersid'];
-        header('location: ../index.php?page=categoriebeheer');
+        $_SESSION['gebruikersid'] = $result['user_ID'];
+        header('location: ../index.php?page=category/categoriebeheer');
     }
 }else{
 

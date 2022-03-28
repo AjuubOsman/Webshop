@@ -4,11 +4,11 @@ include '../../private/connection.php';
 
 
 
-    $name = $_POST['name'];
+    $cat_name = $_POST['cat_name'];
     $catID = $_POST['catID'];
-    $stmt = $conn->prepare("UPDATE categories SET `name` = :name WHERE `category_ID` = :catID");
+    $stmt = $conn->prepare("UPDATE categories SET `cat_name` = :cat_name WHERE `category_ID` = :catID");
 
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':cat_name', $cat_name, PDO::PARAM_STR);
     $stmt->bindParam(':catID', $catID, PDO::PARAM_STR);
 
     $stmt->execute();

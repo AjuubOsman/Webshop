@@ -1,6 +1,7 @@
 <?php
-include '../Private/connection.php';
-$sql = "SELECT category_ID, name FROM categories";
+include '../private/connection.php';
+
+$sql = "SELECT category_ID, cat_name FROM categories";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 ?>
@@ -20,7 +21,7 @@ $stmt->execute();
                 if ($stmt->rowCount() > 0){
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                         <tr>
-                            <td><?= $row["name"] ?></td>
+                            <td><?= $row["cat_name"] ?></td>
                             <td>
                                 <button class="btn btn-warning" onclick="window.location.href='index.php?page=category/updatecategory&catID=<?= $row["category_ID"] ?>'">Aanpassen</button>
                             </td>

@@ -15,7 +15,7 @@ if ($stmt->rowCount() > 0){
             <form action="php/update_category.php" method="POST">
                 <div class="mb-3 mt-3">
                     <label>Naam:</label>
-                    <input type="text" class="form-control" placeholder="Enter name" name="name" value="<?=$row["name"] ?>">
+                    <input type="text" class="form-control" placeholder="Enter name" name="cat_name" value="<?=$row["cat_name"] ?>">
                 </div>
                 <input type="hidden" name="catID" value="<?= $catID ?>">
                 <button type="submit" class="btn btn-success">Opslaan</button>
