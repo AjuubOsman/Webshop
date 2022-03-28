@@ -21,7 +21,7 @@ $stmt->execute();
             <th>product</th>
             <th>Beschrijving</th>
             <th>Prijs</th>
-            <th>Acties</th>
+            <th>Aantal</th>
 
         </tr>
         </thead>
@@ -38,8 +38,10 @@ $stmt->execute();
 
 
                     <td>
-                        <button class="btn btn-danger" name="prodid" onclick="window.location.href='php/shoppingcart.php?prodid=<?= $row["product_ID"] ?>'">Toevoegen Aan Winkelmandje</button>
-
+                        <input type="number" name="amount" min="1" >
+                        <form method="post">
+                            <button class="btn btn-danger" name="prodid" onclick="window.location.href='php/shoppingcart.php?prodid=<?= $row["product_ID"] ?>'">Toevoegen Aan Winkelmandje</button>
+                        </form>
                     </td>
 
 
@@ -59,6 +61,3 @@ $stmt->execute();
 
         </tbody>
     </table>
-
-
-

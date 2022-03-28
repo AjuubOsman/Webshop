@@ -2,9 +2,7 @@
 include '../Private/connection.php';
 
 $userid =  $_SESSION['gebruikersid'];
-if ($_SESSION = true);
 
-{
 $sql = "SELECT u.user_ID, p.product_ID, p.name, p.description, p.price, c.cat_name, c.category_ID, s.amount
         FROM shoppingcart s
         LEFT JOIN producten p ON s.product_ID = p.product_ID
@@ -16,7 +14,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bindParam(':user_ID' , $userid);
 $stmt->execute();
 
-}?>
+?>
 
 <div class="container mt-3">
     <h2>Producten</h2>
