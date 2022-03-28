@@ -5,7 +5,7 @@ include '../../private/connection.php';
 
 $productid = $_GET['prodid'];
 $userid =  $_SESSION['gebruikersid'];
-$amount =  $_POST['amount'];
+$amount = $_POST['amount'];
 
 $sql='SELECT * FROM shoppingcart where user_ID = :gebruikersid and product_ID = :prodid';
 $stmt  = $conn->prepare($sql);
@@ -20,7 +20,7 @@ if ($stmt ->rowCount() == 0) {
                         VALUES(:gebruikersid, :prodid, :amount)");
     $stmt->bindParam(':gebruikersid', $userid);
     $stmt->bindParam(':prodid', $productid);
-    $stmt->bindParam(':amount', $productid);
+    $stmt->bindParam(':amount', $amount);
     $stmt->execute();
 
     header('location: ../index.php?page=shoppingcart');
