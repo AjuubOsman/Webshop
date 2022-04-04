@@ -18,7 +18,7 @@ $stmt->execute();
         <div class="mb-3 mt-3">
 
             <label>Prijs:</label>
-            <input type="text" class="form-control" placeholder="Prijs" name="price">
+            <input type="number" class="form-control" placeholder="Prijs" name="price">
             <label>Categorie:</label>
             <select class="form-control"  class="form-select" name="category_ID">
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>

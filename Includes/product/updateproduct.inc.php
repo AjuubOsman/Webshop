@@ -32,7 +32,7 @@ $stmt2->execute();
         <div class="mb-3 mt-3">
 
             <label>Prijs:</label>
-            <input type="text" class="form-control" placeholder="Prijs" name="price" value="<?= $row['price'] ?>">
+            <input type="number" class="form-control" placeholder="Prijs" name="price" value="<?= $row['price'] ?>">
             <label>Categorie:</label>
 
             <select class="form-control"  class="form-select" name="catid">

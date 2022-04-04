@@ -18,6 +18,4 @@ include '../../private/connection.php';
     $stmt->execute();
     header('location: ../index.php?page=product/productbeheer');
 
-
-
 ?>

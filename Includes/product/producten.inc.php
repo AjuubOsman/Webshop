@@ -38,9 +38,11 @@ $stmt->execute();
 
 
                     <td>
-                        <input type="number" name="amount" min="1" >
-                        <form method="post">
-                            <button class="btn btn-danger" name="prodid" onclick="window.location.href='php/shoppingcart.php?prodid=<?= $row["product_ID"] ?>'">Toevoegen Aan Winkelmandje</button>
+
+                        <form action="php/shoppingcart.php" method="post">
+                            <input type="number" name="amount" value="1" min="1" required>
+                            <input type="hidden" name="prodid" value="<?= $row["product_ID"] ?>">
+                            <button class="btn btn-danger" type="submit" name="submit">Toevoegen Aan Winkelmandje</button>
                         </form>
                     </td>
 

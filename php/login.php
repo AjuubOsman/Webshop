@@ -25,7 +25,10 @@ if ($query->rowCount() == 1 ) {
         $_SESSION['gebruikersid'] = $result['user_ID'];
         header('location: ../index.php?page=category/categoriebeheer');
     }
-
+    else
+    {
+        $_SESSION['gast'] = $result['gast'];
+    }
 }else{
 
     $_SESSION['melding'] = 'Combinatie gebruikersnaam en Wachtwoord onjuist.';
