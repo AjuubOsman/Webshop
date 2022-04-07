@@ -30,7 +30,7 @@ if (isset($_SESSION['role'])){
                             <a class="nav-link" href="index.php?page=orders">Mijn bestellingen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="php/loguit.php">Uitloggen</a>
+                            <a class="nav-link" href="php/loguit.php" > Uitloggen</a>
                         </li>
                   <?php  }elseif ($_SESSION['role'] == "admin"){ ?>
                         <li class="nav-item">

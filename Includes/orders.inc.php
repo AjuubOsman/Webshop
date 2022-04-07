@@ -61,14 +61,14 @@ $stmt->execute();
         if ($stmt ->rowCount() > 0){?>
 
             <tr>
-            <td>
-                <form action="php/order.php" method="post">
-                    <button class="btn btn-danger" type="submit" name="submit">Bestel</button>
-                </form>
-            </td>
+                <td>
+                    <form action="php/order.php" method="post">
+                        <button class="btn btn-danger" type="submit" name="submit">Bestel</button>
+                    </form>
+                </td>
 
-        </tr>
-      <?php }?>
+            </tr>
+        <?php }?>
 
 
 

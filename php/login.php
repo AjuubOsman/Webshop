@@ -19,7 +19,7 @@ if ($query->rowCount() == 1 ) {
     if ($result['role'] == "klant") {
         $_SESSION['role'] = "klant";
         $_SESSION['gebruikersid'] = $result['user_ID'];
-        header('location: ../index.php?page=hoofdpagina');
+        header('location: ../index.php?page=shoppingcart');
     } elseif ($result['role'] == "admin") {
         $_SESSION['role'] = "admin";
         $_SESSION['gebruikersid'] = $result['user_ID'];
