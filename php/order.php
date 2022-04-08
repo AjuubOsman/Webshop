@@ -13,14 +13,8 @@ include '../../private/connection.php';
 
     $stmt->execute();
 
-    $product_ID =  $_POST['prodid'];
-    $amount = $_POST['amount'];
 
-
-    $sql = ("SELECT order_ID from orders");
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $order_ID = $conn->lastInsertId();
 
 
     $stmt = $conn->prepare("SELECT *  FROM shoppingcart where user_ID = :gebruikersid");
@@ -30,14 +24,19 @@ include '../../private/connection.php';
 
     foreach ($result as $product){
 
-        $stmt = $conn->prepare("INSERT INTO producten_orders (order_ID, product_ID, amount)
-                            VALUES(:order_ID,:prodid, :amount)");
-        $stmt->bindParam(':order_ID',  $row["order_ID"]);
+        $stmt = $conn->prepare("INSERT INTO producten_orders (order_ID, product_ID, amount, price)
+                            VALUES(:order_ID,:prodid, :amount, :price)");
+        $stmt->bindParam(':order_ID',  $order_ID);
         $stmt->bindParam(':prodid', $product["product_ID"]);
         $stmt->bindParam(':amount', $product["amount"]);
+        $stmt->bindParam(':price', $product["price"]);
 
         $stmt->execute();
     }
+
+
+
+
 
 
 

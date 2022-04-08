@@ -5,7 +5,7 @@ include '../../private/connection.php';
 
 $productid = $_POST['prodid'];
 $userid =  $_SESSION['gebruikersid'];
-
+$price = $_POST['price'];
 $amount = $_POST['amount'];
 
 
@@ -18,15 +18,24 @@ $stmt ->execute();
 
 if ($stmt ->rowCount() == 0) {
 
-    $stmt = $conn->prepare("INSERT INTO shoppingcart (user_ID, product_ID,amount)
-                        VALUES(:gebruikersid, :prodid, :amount)");
+    $stmt = $conn->prepare("INSERT INTO shoppingcart (user_ID, product_ID,amount, price )
+                        VALUES(:gebruikersid, :prodid, :amount, :price)");
     $stmt->bindParam(':gebruikersid', $userid);
     $stmt->bindParam(':prodid', $productid);
     $stmt->bindParam(':amount', $amount);
+    $stmt->bindParam(':price', $price);
     $stmt->execute();
 
     header('location: ../index.php?page=shoppingcart');
 }
+else{
+    $stmt = $conn->prepare("UPDATE shoppingcart SET amount = amount + $amount  where user_ID = :gebruikersid and product_ID = :prodid");
+    $stmt ->bindParam(':gebruikersid' , $userid);
+    $stmt ->bindParam(':prodid' , $productid);
+    $stmt->execute();
+    header('location: ../index.php?page=shoppingcart');
+}
+
 
 
 
