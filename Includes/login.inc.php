@@ -17,8 +17,10 @@
                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+
 
         </form>
+        <button type="submit" onclick="window.location.href='../php/shoppingcartgast.php'" class="btn btn-primary">Ga verder als gast</button>
     </div>
 </div>

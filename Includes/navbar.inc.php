@@ -27,7 +27,7 @@ if (isset($_SESSION['role'])){
                             <a class="nav-link" href="index.php?page=shoppingcart">Winkelmandje</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?page=orders">Mijn bestellingen</a>
+                            <a class="nav-link" href="index.php?page=history">Bestel geschiedenis</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="php/loguit.php" > Uitloggen</a>
@@ -54,7 +54,7 @@ if (isset($_SESSION['role'])){
         <a class="nav-link" href="index.php?page=shoppingcart">Winkelmandje</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?page=orders">Mijn bestellingen</a>
+        <a class="nav-link" href="index.php?page=history">Bestel geschiedenis</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?page=login">Inloggen</a>

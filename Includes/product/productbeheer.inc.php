@@ -1,5 +1,6 @@
 <?php
 include '../Private/connection.php';
+
 $sql = "SELECT p.product_ID, p.name, p.description, p.price, c.cat_name, p.category_ID, p.status 
         FROM producten p
         LEFT JOIN categories c ON p.category_ID = c.category_ID

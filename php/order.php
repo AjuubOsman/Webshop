@@ -2,8 +2,6 @@
 session_start();
 include '../../private/connection.php';
 
-
-
     $userid =  $_SESSION['gebruikersid'];
 
 
@@ -13,9 +11,7 @@ include '../../private/connection.php';
 
     $stmt->execute();
 
-
     $order_ID = $conn->lastInsertId();
-
 
     $stmt = $conn->prepare("SELECT *  FROM shoppingcart where user_ID = :gebruikersid");
     $stmt ->bindParam(':gebruikersid' , $userid);
@@ -34,23 +30,8 @@ include '../../private/connection.php';
         $stmt->execute();
     }
 
-
-
-
-
-
-
-
-
 $stmt = $conn->prepare("DELETE FROM shoppingcart");
 $stmt->execute();
 
-
-
-    header('location: ../index.php?page=shoppingcart');
-
-
-
-
-
+header('location: ../index.php?page=shoppingcart');
 ?>

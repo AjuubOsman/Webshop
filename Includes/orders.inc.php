@@ -1,18 +1,36 @@
 <?php
+//unset($_SESSION['cart']);
 include '../Private/connection.php';
 
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+if (isset($_SESSION['gebruikersid'])) {
+
+$order_ID =  $_GET['order_ID'];
 $userid =  $_SESSION['gebruikersid'];
 
-$sql = "SELECT u.user_ID, p.product_ID, p.name, p.description, p.price, c.cat_name, c.category_ID, s.amount
-        FROM shoppingcart s
-        LEFT JOIN producten p ON s.product_ID = p.product_ID
-        LEFT JOIN users u ON s.user_ID = u.user_ID
-        LEFT JOIN categories c ON p.category_ID = c.category_ID
-        WHERE s.user_ID = :user_ID AND s.amount > 0";
+$sql = "SELECT p.product_ID, p.name, p.description, po.amount, o.date , o.user_ID, po.order_ID, po.price
+FROM  producten p
+INNER JOIN producten_orders po on po.product_ID = p.product_ID
+INNER JOIN orders o ON po.order_ID = o.order_ID
+WHERE  po.order_ID = :order_ID ";
 
 $stmt = $conn->prepare($sql);
-$stmt->bindParam(':user_ID' , $userid);
+$stmt->bindParam(':order_ID' , $order_ID);
 $stmt->execute();
+
+$sql2 = "SELECT SUM(po.price * po.amount) as totalprice from producten_orders po
+LEFT JOIN producten p ON po.product_ID = p.product_ID
+INNER JOIN orders o ON po.order_ID = o.order_ID
+INNER JOIN users u ON o.user_ID = u.user_ID
+WHERE u.user_ID = :userid and  po.order_ID = :order_ID";
+
+$stmt2 = $conn->prepare($sql2);
+$stmt2->bindParam(':userid', $userid, PDO::PARAM_INT);
+$stmt2->bindParam(':order_ID' , $order_ID);
+$stmt2->execute();
 
 ?>
 
@@ -21,35 +39,29 @@ $stmt->execute();
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Categorie</th>
-            <th>product</th>
+            <th>Datum</th>
+            <th>Product</th>
             <th>Beschrijving</th>
-            <th>Prijs</th>
             <th>Aantal</th>
-            <th>Bestellen</th>
+            <th>Prijs</th>
+
+
 
 
         </tr>
         </thead>
         <tbody>
+        <?php  ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC))  ?>
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
             <tr>
-                <td><?= $row["cat_name"] ?></td>
+                <td><?= $row["date"] ?></td>
                 <td><?= $row["name"] ?></td>
                 <td><?= $row["description"] ?></td>
-                <td><?= $row["price"]  ?>$</td>
+                <td><?= $row["amount"] ?></td>
+                <td><?= $row["price"] ?></td>
 
 
-                <td>
 
-                    <form action="php/edit_shoppingcart.php" method="post">
-
-                        <input type="text" name="amount" value="<?= $row["amount"]  ?>" min="0" required>
-                        <input type="hidden" name="prodid" value="<?= $row["product_ID"] ?>">
-                        <button class="btn btn-danger" type="submit" name="submit">Opslaan</button>
-
-                    </form>
-                </td>
 
 
 
@@ -58,21 +70,71 @@ $stmt->execute();
 
             </tr>
         <?php  }
-        if ($stmt ->rowCount() > 0){?>
-
-            <tr>
-                <td>
-                    <form action="php/order.php" method="post">
-                        <button class="btn btn-danger" type="submit" name="submit">Bestel</button>
-                    </form>
-                </td>
-
-            </tr>
-        <?php }?>
-
-
-
-
+        ?>
+        <th>Totaal</th>
+        <tr>
+            <td><?= $row2["totalprice"]  ?>$</td>
+        </tr>
 
         </tbody>
     </table>
+    <?php } else {
+    $order_ID2 =  $_GET['order_ID2'];
+
+
+    $sql2 = "SELECT p.product_ID, p.name, p.description, po.amount, o.date , o.user_ID, po.order_ID, po.price
+FROM  producten p
+INNER JOIN producten_orders po on po.product_ID = p.product_ID
+INNER JOIN orders o ON po.order_ID = o.order_ID
+WHERE  po.order_ID = :order_ID2 ";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bindParam(':order_ID2', $order_ID2);
+    $stmt2->execute();
+
+
+
+    ?>
+
+    <div class="container mt-3">
+        <h2>Winkelmand</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Product</th>
+                <th>Beschrijving</th>
+                <th>Aantal</th>
+                <th>Prijs</th>
+
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <?php while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) { ?>
+                <tr>
+                    <td><?= $row2["date"] ?></td>
+                    <td><?= $row2["name"] ?></td>
+                    <td><?= $row2["description"] ?></td>
+                    <td><?= $row2["amount"] ?></td>
+                    <td><?= $row2["amount"] * $row2["price"] ?>$</td>
+
+
+
+
+
+
+
+
+
+                </tr>
+            <?php  }
+            ?>
+
+
+            </tbody>
+        </table>
+        <?php } ?>
+

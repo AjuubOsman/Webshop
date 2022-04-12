@@ -40,6 +40,7 @@ $stmt->execute();
                     <td>
 
                         <form action="php/shoppingcart.php" method="post">
+                            <input type="hidden" name="price" value="<?= $row["price"] ?>" min="1" required>
                             <input type="number" name="amount" value="1" min="1" required>
                             <input type="hidden" name="prodid" value="<?= $row["product_ID"] ?>">
                             <button class="btn btn-danger" type="submit" name="submit">Toevoegen Aan Winkelmandje</button>
