@@ -18,7 +18,7 @@ $order_ID = $conn->lastInsertId();
 
 
 //echo "<pre>", print_r($_SESSION['cart']), "</pre>";
-echo $order_ID;
+
 
 foreach ($_SESSION['cart'] as $product){
 
@@ -33,5 +33,12 @@ foreach ($_SESSION['cart'] as $product){
 }
 
 session_destroy();
+session_start();
+
+$_SESSION['order_ID'] = $order_ID;
+
+
+
+
 header('location: ../index.php?page=shoppingcart');
 ?>

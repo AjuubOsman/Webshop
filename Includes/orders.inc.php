@@ -34,8 +34,9 @@ $stmt2->execute();
 
 ?>
 
+
 <div class="container mt-3">
-    <h2>Winkelmand</h2>
+    <h2>Bestellingen</h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -96,7 +97,7 @@ WHERE  po.order_ID = :order_ID2 ";
     ?>
 
     <div class="container mt-3">
-        <h2>Winkelmand</h2>
+        <h2>Bestellingen</h2>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -104,7 +105,7 @@ WHERE  po.order_ID = :order_ID2 ";
                 <th>Product</th>
                 <th>Beschrijving</th>
                 <th>Aantal</th>
-                <th>Prijs</th>
+                <th>Totaal Prijs</th>
 
 
 

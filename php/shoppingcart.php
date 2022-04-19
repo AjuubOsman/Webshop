@@ -40,8 +40,10 @@ if (isset($_SESSION['gebruikersid'])) {
     //unset($_SESSION['cart']);
     $product = array (
      "id" => $productid, "amount" => $amount, "price" => $price
+
     );
-    echo "<pre>", print_r($_SESSION['cart']), "</pre>";
+
+   //echo "<pre>", print_r($_SESSION['cart']), "</pre>";
     //    unset($_SESSION['cart']);
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
@@ -56,6 +58,6 @@ if($new){
     $_SESSION['cart'][] = $product;
 }
 
-    echo "<pre>", print_r($_SESSION['cart']), "</pre>";
+    //echo "<pre>", print_r($_SESSION['cart']), "</pre>";
 }
 header('location: ../index.php?page=shoppingcart');

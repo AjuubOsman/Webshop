@@ -53,9 +53,9 @@ $userid =  $_SESSION['gebruikersid'];
                     if ($stmt ->rowCount() > 0){?>
                         <tr>
                             <td>
-                                <form action="php/order.php" method="post">
-                                    <button class="btn btn-danger" type="submit" name="submit">Bestel</button>
-                                </form>
+
+                                    <button class="btn btn-danger" onclick="window.location.href='index.php?page=orderbevestig'" type="submit" name="submit">Afrekenen</button>
+
                             </td>
                         </tr>
                     <?php }?>
@@ -80,7 +80,7 @@ $userid =  $_SESSION['gebruikersid'];
     <tbody>
                 <?php
  //echo "<pre>", print_r($_SESSION['cart']), "</pre>";
-    foreach ( $_SESSION['cart'] as $item ) {
+    foreach ( $_SESSION['cart'] as $key => $item ) {
         $sql = "SELECT * FROM producten p LEFT JOIN categories c ON p.category_ID = c.category_ID WHERE product_ID = :id ";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $item['id']);
@@ -91,24 +91,43 @@ $userid =  $_SESSION['gebruikersid'];
                     <td><?= $row["cat_name"] ?></td>
                     <td><?= $row["name"] ?></td>
                     <td><?= $row["description"]  ?></td>
-                    <td><?= $item["amount"]  ?></td>
+                    <td>
+                    <form action="php/edit_shoppingcart.php" method="post">
+                                    <input type="text" name="amount" value="<?= $item["amount"]  ?>" min="0" required>
+                                    <input type="hidden" name="prodid" value="<?= $row["product_ID"] ?>">
+                                     <input type="hidden" name="key" value="<?=$key?>">
+                                    <button class="btn btn-danger" type="submit" name="submit">Opslaan</button>
+                                </form>
+                                <td>
+
+</td>
                     <td><?= $row["price"]  ?></td>
                     <td><?= $item["amount"] * $row["price"] ?>$</td>
                     <td>
 
                     </td>
                 </tr>
-    <?php } ?>
-                <tr>
-                    <td>
-                        <form action="php/guestorder.php" method="post">
-                            <button class="btn btn-danger" type="submit" name="submit">Bestel</button>
-                        </form>
-                    </td>
-                </tr>
+        <?php } if ($_SESSION['cart'] != NULL) {
+    ?>
+                    <tr>
+                        <td>
+                                 <button class="btn btn-danger" onclick="window.location.href='index.php?page=orderbevestig'" type="submit" name="submit">Afrekenen</button>
 
-            </tbody>
-        </table>
-    </div>
-<?php } ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+
+
+<?php }}?>
+
+                <?php if (isset($_SESSION['order_ID'])){?>
+            <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                bestelling   <?=$_SESSION['order_ID']?>   is besteld.
+</div> <?php
+
+        unset($_SESSION['order_ID']);
+            }?>

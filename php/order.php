@@ -30,8 +30,9 @@ include '../../private/connection.php';
         $stmt->execute();
     }
 
+
 $stmt = $conn->prepare("DELETE FROM shoppingcart");
 $stmt->execute();
 
-header('location: ../index.php?page=shoppingcart');
+header('location: ../index.php?page=history');
 ?>

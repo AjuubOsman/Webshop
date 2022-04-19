@@ -21,6 +21,5 @@
 
 
         </form>
-        <button type="submit" onclick="window.location.href='../php/shoppingcartgast.php'" class="btn btn-primary">Ga verder als gast</button>
     </div>
 </div>
